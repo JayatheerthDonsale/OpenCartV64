@@ -1,0 +1,88 @@
+# docker.yaml
+# Docker Compose file with two profiles:
+#  - "standalone" : quick single-container Selenium (Chrome)
+#  - "grid"       : Selenium Grid (hub + chrome + firefox nodes)
+#
+# Usage:
+#  - Start standalone: docker compose -f docker.yaml --profile standalone up -d
+#  - Start grid:       docker compose -f docker.yaml --profile grid up -d
+#
+
+
+services:
+
+  #########################
+  # Standalone (simple)   #
+  #########################
+  selenium-standalone:
+    image: selenium/standalone-chrome:latest
+    container_name: selenium-standalone
+    ports:
+      - "4444:4444"   # Selenium server (WebDriver) port
+      - "5900:5900"   # VNC (if image supports it) - useful to see the browser
+    environment:
+      # optional: limit sessions, change screen size, etc.
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SCREEN_WIDTH=1920
+      - SCREEN_HEIGHT=1080
+
+    profiles: ["standalone"]
+
+  #########################
+  # Selenium Grid (hub)   #
+  #########################
+  selenium-hub:
+    image: selenium/hub:latest
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"   # Grid console / router
+      # internal event-bus ports for nodes (not published to host)
+    networks:
+      - selenium-grid
+    profiles: ["grid"]
+
+  #########################
+  # Chrome Node (Grid)    #
+  #########################
+  node-chrome:
+    image: selenium/node-chrome:latest
+    container_name: node-chrome
+    depends_on:
+      - selenium-hub
+    environment:
+      # event bus configuration used by Selenium Grid 4
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=2
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+
+    networks:
+      - selenium-grid
+    profiles: ["grid"]
+
+  #########################
+  # Firefox Node (Grid)   #
+  #########################
+  node-firefox:
+    image: selenium/node-firefox:latest
+    container_name: node-firefox
+    depends_on:
+      - selenium-hub
+    restart: unless-stopped
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=2
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+
+    networks:
+      - selenium-grid
+    profiles: ["grid"]
+
+networks:
+  selenium-grid:
+    driver: bridge
+
