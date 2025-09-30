@@ -46,7 +46,7 @@ public class TC01_AccountRegistrationTest extends BaseClass {
         
         logger.info("Validating the Confirmation Message!");
         String message = ar.getConfirmationMessage();
-        Assert.assertEquals(message, "Your Account Has Been Created");
+        Assert.assertEquals(message, "Your Account Has Been Created!");
     	}
     	catch (AssertionError e) {
 			logger.error("Test Failed!");

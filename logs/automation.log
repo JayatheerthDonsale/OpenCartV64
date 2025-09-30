@@ -1,0 +1,17 @@
+18:19:25.767 [main] INFO  testCases.TC03_LoginTestDDT - ***** End TC03_LoginTestDDT *****
+18:19:25.779 [main] INFO  testCases.TC03_LoginTestDDT - ***** Starting TC03_LoginTestDDT *****
+18:19:29.615 [main] INFO  testCases.TC03_LoginTestDDT - ***** End TC03_LoginTestDDT *****
+18:19:29.796 [main] INFO  testCases.TC03_LoginTestDDT - ***** Starting TC03_LoginTestDDT *****
+18:19:42.972 [main] INFO  testCases.TC03_LoginTestDDT - ***** End TC03_LoginTestDDT *****
+18:19:42.974 [main] INFO  testCases.TC03_LoginTestDDT - ***** Starting TC03_LoginTestDDT *****
+18:19:49.599 [main] INFO  testCases.TC03_LoginTestDDT - ***** End TC03_LoginTestDDT *****
+18:19:49.601 [main] INFO  testCases.TC03_LoginTestDDT - ***** Starting TC03_LoginTestDDT *****
+18:20:04.434 [main] INFO  testCases.TC03_LoginTestDDT - ***** End TC03_LoginTestDDT *****
+18:20:06.688 [main] INFO  testCases.TC04_SearchItemTest - *****TC04_SearchItemTest Started*****
+18:20:07.151 [main] INFO  testCases.TC04_SearchItemTest - Searching for Iphone
+18:20:10.232 [main] INFO  testCases.TC04_SearchItemTest - *****TC04_SearchItemTest Ends!*****
+18:20:12.363 [main] INFO  testCases.TC05_AddToCartTest - *****Starting TC05_AddToCartTest*****
+18:20:12.819 [main] INFO  testCases.TC05_AddToCartTest - Searching for MacBook
+18:20:12.854 [main] INFO  testCases.TC05_AddToCartTest - Searched Product Exists! 
+18:20:13.112 [main] INFO  testCases.TC05_AddToCartTest - Product was Successfully Added to Cart! 
+18:20:13.113 [main] INFO  testCases.TC05_AddToCartTest - *****Ending TC05_AddToCartTest*****
